@@ -24,6 +24,10 @@ public record LootCaughtEvent(FishLoot loot, boolean newDiscovery, boolean isLeg
         return loot;
     }
 
+    public FishLoot getLoot() {
+        return loot();
+    }
+
     /**
      * A shortcut to get the unique identifier of the item caught.
      *
@@ -41,6 +45,9 @@ public record LootCaughtEvent(FishLoot loot, boolean newDiscovery, boolean isLeg
         return player;
     }
 
+    public Player getPlayer() {
+        return player();
+    }
     /**
      * @return True if this is the first time the player has caught this specific loot.
      */
@@ -49,6 +56,9 @@ public record LootCaughtEvent(FishLoot loot, boolean newDiscovery, boolean isLeg
         return newDiscovery;
     }
 
+    public boolean isNewDiscovery() {
+        return newDiscovery;
+    }
     /**
      * @return True if the caught item has the Legendary flag enabled.
      */
@@ -65,6 +75,9 @@ public record LootCaughtEvent(FishLoot loot, boolean newDiscovery, boolean isLeg
         return performance;
     }
 
+    public float getPerformance() {
+        return performance;
+    }
     /**
      * Returns a human-readable string rating based on the performance score.
      * <p>
