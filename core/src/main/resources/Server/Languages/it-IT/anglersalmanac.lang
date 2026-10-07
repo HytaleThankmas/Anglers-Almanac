@@ -52,6 +52,7 @@ fishing.bait.retuned = è tornata
 
 fishing.caught.legDiscovered = SCOPERTA LEGGENDARIA
 fishing.caught.newFish = Nuovo Pesce Trovato
+fishing.caught.nonFish = Pesce Trovato
 
 ### Almanac
 almanac.unknown = Sconosciuto

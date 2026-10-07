@@ -48,7 +48,7 @@ dependencies {
     implementation project(':api')
     compileOnly("com.hypixel.hytale:Server:$hytale_build")
     if (hasHytaleHome) {
-        runtimeOnly(files("$hytaleHome/install/$patchline/package/game/latest/Server/HytaleServer.jar"))
+        //runtimeOnly(files("$hytaleHome/install/$patchline/package/game/latest/Server/HytaleServer.jar"))
     }
 
     implementation("com.google.guava:guava:33.5.0-jre")
@@ -60,6 +60,8 @@ dependencies {
     //implementation(files("../libs/Creditor-1.0.4.jar"))
     //implementation("curse.maven:creditor-1560961:8195970")
     implementation("com.github.rm20killer:CodecAnnotation:1.0.0")
+
+    compileOnly(files("../libs/Thankmas-Vault-0.0.1.jar"))
 
 }
 

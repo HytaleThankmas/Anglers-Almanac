@@ -1,11 +1,12 @@
 package dev.rm20.anglersalmanac.Utils;
 
-import com.hypixel.hytale.component.CommandBuffer;
-import com.hypixel.hytale.component.Holder;
-import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.math.vector.Rotation3f;
+import com.hypixel.hytale.protocol.ItemWithAllMetadata;
+import com.hypixel.hytale.protocol.packets.interface_.NotificationStyle;
+import com.hypixel.hytale.server.core.util.NotificationUtil;
 import dev.rm20.anglersalmanac.IEvents.PreFishRollEvent;
+import dev.rm20.anglersalmanac.Inventory.FishBagComponent;
 import dev.rm20.anglersalmanac.Minigame.Minigame;
 import dev.rm20.anglersalmanac.Models.FishLoot;
 import dev.rm20.anglersalmanac.api.ICatchManager;
@@ -194,16 +195,53 @@ public class CatchUtils implements ICatchManager {
 
     }
 
-    public static void DropItem(ItemStack loot, Player player, CommandBuffer<EntityStore> commandBuffer, Ref<EntityStore> bobberRef) {
 
+    //MODIFIED
+    public static final ComponentType<EntityStore, ? extends InventoryComponent>[] FISH_ROUTING = new ComponentType[]{
+            FishBagComponent.getComponentType()
+    };
 
-        assert player.getReference() != null;
-        TransformComponent transform = player.getReference().getStore().getComponent(player.getReference(), TransformComponent.getComponentType());
-        ItemUtils.interactivelyPickupItem(player.getReference(), loot, transform.getPosition(), commandBuffer);
+    public static boolean DropItem(ItemStack loot, Player player, CommandBuffer<EntityStore> commandBuffer, Ref<EntityStore> bobberRef) {
+        if (player.getReference() != null) {
+            var accessor = player.getReference().getStore();
 
-        //TODO
-        //Rework to make it look like the fish is coming from the bobber and fly to the player?
+            if (accessor.getComponent(player.getReference(), FishBagComponent.getComponentType()) == null) {
+                AnglersAlmanac.LOGGER.atInfo().log("Attaching new FishBagComponent to player.");
+                accessor.putComponent(
+                        player.getReference(),
+                        FishBagComponent.getComponentType(),
+                        new FishBagComponent(FishBagComponent.DEFAULT_CAPACITY)
+                );
+            }
 
+            var combined = InventoryComponent.getCombined(accessor, player.getReference(), FISH_ROUTING);
+
+            var remainder = combined.addItemStack(loot);
+            if (remainder.getRemainder() != null && remainder.getRemainder().getQuantity() > 0) {
+                //AnglersAlmanac.LOGGER.atInfo().log("Fish bag is full!");
+
+                Ref<EntityStore> playerRef = player.getReference();
+                if(playerRef == null) return false;
+                PlayerRef playerRef1 = playerRef.getStore().getComponent(playerRef, PlayerRef.getComponentType());
+                if(playerRef1 == null) return false;
+                Message titleMessage = Message.join(Message.raw("Fish bag full"));
+                titleMessage.color(Color.RED);
+                Message subtitleMessage = Message.translation("sell your fish at the Fisher");
+                try {
+                    var packetHandler = playerRef1.getPacketHandler();
+                    NotificationUtil.sendNotification(
+                            packetHandler,
+                            titleMessage,
+                            subtitleMessage,
+                            NotificationStyle.Danger);
+                } catch (Exception e) {
+                    AnglersAlmanac.LOGGER.atWarning().log("Failed to send notification to " + playerRef1.getUsername() + ": " + e.getMessage());
+                }
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     public static void DropLoot(FishLoot loot, Player player, CommandBuffer<EntityStore> commandBuffer, Ref<EntityStore> bobberRef, int rating) {
@@ -268,8 +306,9 @@ public class CatchUtils implements ICatchManager {
                 // No idea if the thing above works need testing
             }
         }
-        DropItem(fishStack, player, commandBuffer, bobberRef);
-        SaveLoot(player, loot, rating);
+        if(DropItem(fishStack, player, commandBuffer, bobberRef)){
+            SaveLoot(player, loot, rating);
+        }
 
     }
 
@@ -302,9 +341,9 @@ public class CatchUtils implements ICatchManager {
 
             if (playerRef1 == null) return;
             dispatchCaughtFishEvents(loot, isNewDiscovery, isLegendary, player, ratingScore);
+            ItemStack itemStack = new ItemStack(loot.getItemID(),1);
+            String fishDisplayName = Message.translation(itemStack.getItem().getTranslationKey()).getAnsiMessage();
             if (isNewDiscovery) {
-                ItemStack itemStack = new ItemStack(loot.getItemID(),1);
-                String fishDisplayName = Message.translation(itemStack.getItem().getTranslationKey()).getAnsiMessage();
                 if (isLegendary) {
                     showDiscoveryUI(playerRef1, fishDisplayName, "anglersalmanac.fishing.caught.legDiscovered", Color.YELLOW);
                     int audio = SoundEvent.getAssetMap().getIndex("AA_Fishing_Book_New_Fish_2");
@@ -320,6 +359,15 @@ public class CatchUtils implements ICatchManager {
                         SoundUtil.playSoundEvent2dToPlayer(playerRef1, audio, SoundCategory.UI);
                     });
                 }
+            }
+            else
+            {
+                showDiscoveryUI(playerRef1, fishDisplayName, "anglersalmanac.fishing.caught.nonFish", Color.GREEN);
+                int audio = SoundEvent.getAssetMap().getIndex("AA_Fishing_Book_New_Fish_1");
+                assert player.getWorld() != null;
+                player.getWorld().execute(() -> {
+                    SoundUtil.playSoundEvent2dToPlayer(playerRef1, audio, SoundCategory.UI);
+                });
             }
             BookPageManager.invalidateCache(String.valueOf(playerRef1.getUuid()));
         }).exceptionally(ex -> {

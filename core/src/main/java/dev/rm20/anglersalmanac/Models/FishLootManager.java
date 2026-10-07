@@ -182,10 +182,19 @@ public class FishLootManager extends FishLoot implements JsonAssetWithMap<String
         return getAllLoot().stream().filter(loot -> loot.getId().equalsIgnoreCase(id)).findFirst().orElse(null);
     }
 
+    @Override
+    public FishLootManager getFishDataFromItemId(String itemId) {
+        if (itemId == null) return null;
+        return getAllLoot().stream().filter(loot -> loot.getItemID().equalsIgnoreCase(id)).findFirst().orElse(null);
+
+    }
     public static FishLootManager getInternalFishData(String id) {
         if (id == null) return null;
         return getInternalAllLoot().stream()
-                .filter(loot -> loot.getId().equalsIgnoreCase(id))
+                .filter(loot ->
+                        id.equalsIgnoreCase(loot.getId()) ||
+                                (loot.getItemID() != null && id.equalsIgnoreCase(loot.getItemID()))
+                )
                 .findFirst()
                 .orElse(null);
     }
