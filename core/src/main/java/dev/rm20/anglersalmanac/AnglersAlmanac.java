@@ -24,6 +24,7 @@ import dev.rm20.anglersalmanac.Registration.*;
 import dev.rm20.anglersalmanac.Models.FishLootManager;
 import dev.rm20.anglersalmanac.Utils.BaitUtils;
 import dev.rm20.anglersalmanac.Utils.Intergration.MMOSkillTree;
+import dev.rm20.anglersalmanac.Utils.Intergration.ThankmasVaultHook;
 import dev.rm20.anglersalmanac.api.AnglersAlmanacAPI;
 import dev.rm20.anglersalmanac.triggereffects.GiveRodEffect;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class AnglersAlmanac extends JavaPlugin {
     @Getter
     private static AnglersAlmanac instance;
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
-
+    public ThankmasVaultHook ECONOMY_HOOK;
 
     public AlmanacDatabase database;
     public AlmanacRepository Book_IDs;

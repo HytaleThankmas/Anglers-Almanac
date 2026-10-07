@@ -55,6 +55,7 @@ fishing.bait.retuned = has retuned
 
 fishing.caught.legDiscovered = LEGENDARY DISCOVERY
 fishing.caught.newFish = New Fish Found
+fishing.caught.nonFish = Fish Found
 
 ### Almanac
 almanac.unknown = Unknown

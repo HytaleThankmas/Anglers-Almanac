@@ -1,7 +1,7 @@
 {
     "Group": "dev.rm20",
     "Name": "AnglersAlmanac",
-    "Version": "1.2.1",
+    "Version": "1.2.1-Thankmas",
     "Description": "The Ultimate Fishing Overhaul for Orbis",
     "Authors": [
         {
@@ -22,7 +22,8 @@
         
     },
     "OptionalDependencies": {
-        "Ziggfreed:MMOSkillTree": "*"
+        "Ziggfreed:MMOSkillTree": "*",
+        "dev.rm20:ThankmasVault": "*"
     },
     "LoadBefore": {
         

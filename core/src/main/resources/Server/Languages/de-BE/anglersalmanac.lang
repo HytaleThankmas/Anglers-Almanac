@@ -55,6 +55,7 @@ fishing.bait.retuned = wurde zurückgegeben
 
 fishing.caught.legDiscovered = LEGENDÄRE ENTDECKUNG
 fishing.caught.newFish = Neuer Fisch entdeckt
+fishing.caught.nonFish = Fisch entdeckt
 
 ### Almanach
 almanac.unknown = Unbekannt

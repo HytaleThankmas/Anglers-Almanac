@@ -4,6 +4,7 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import dev.rm20.anglersalmanac.AnglersAlmanac;
 import dev.rm20.anglersalmanac.Components.*;
+import dev.rm20.anglersalmanac.Inventory.FishBagComponent;
 
 public class ComponentManager {
     public static void registerComponent(AnglersAlmanac plugin) {
@@ -17,5 +18,9 @@ public class ComponentManager {
 
         ComponentType<EntityStore, PhysicsComponent> type = plugin.getEntityStoreRegistry().registerComponent(PhysicsComponent.class, PhysicsComponent::new);
         PhysicsComponent.setComponentType(type);
+
+        ComponentType<EntityStore, FishBagComponent> fishBagType = plugin.getEntityStoreRegistry().registerComponent(FishBagComponent.class, "anglersalmanac:fish_bag", FishBagComponent.CODEC);
+        FishBagComponent.setComponentType(fishBagType);
+
     }
 }
