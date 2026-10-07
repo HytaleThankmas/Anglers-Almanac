@@ -1,5 +1,7 @@
 package dev.rm20.anglersalmanac.Commands;
 
+import com.hypixel.hytale.builtin.triggervolumes.TriggerVolumesPlugin;
+import com.hypixel.hytale.builtin.triggervolumes.manager.TriggerVolumeManager;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.server.core.Message;
@@ -19,13 +21,17 @@ import dev.rm20.anglersalmanac.Models.FishLootManager;
 import dev.rm20.anglersalmanac.Registration.CommandInfo;
 import dev.rm20.anglersalmanac.Utils.EnvironmentParser;
 import dev.rm20.anglersalmanac.Utils.TimeUtils;
+import dev.rm20.anglersalmanac.Utils.TriggerVolumeUtils;
 import dev.rm20.anglersalmanac.Utils.Validator.TimePeriod;
 
 import javax.annotation.Nonnull;
 
 @CommandInfo(
-        name = "simfish",
-        description = "Simulates 100 fishing rolls at current location with depth 3"
+        name = "sim",
+        description = "Simulates fishing rolls at current location and displays roll statistics",
+        aliases = {"simfish", "simulate"},
+        parent = "almanac",
+        permission = "AnglersAlmanac.admin"
 )
 public class SimulateFishingCommand extends AbstractPlayerCommand {
 
@@ -58,6 +64,9 @@ public class SimulateFishingCommand extends AbstractPlayerCommand {
         WorldMapTracker.ZoneDiscoveryInfo currentZone = worldMapTracker.getCurrentZone();
         ZoneInfo info = EnvironmentParser.parse(currentZone.regionName());
 
+        TriggerVolumeManager manager = store.getResource(TriggerVolumesPlugin.get().getManagerResourceType());
+        String triggerKey = TriggerVolumeUtils.getFishingZone(manager, transform.getPosition());
+
         FishingContext locationInfo = new FishingContext(
                 timeKeyword,
                 timeResource.getMoonPhase(),
@@ -69,7 +78,8 @@ public class SimulateFishingCommand extends AbstractPlayerCommand {
                 "clear",
                 20,
                 null,
-                1
+                1,
+                triggerKey
         );
 
         java.util.Map<String, Integer> results = new java.util.HashMap<>();
@@ -95,6 +105,7 @@ public class SimulateFishingCommand extends AbstractPlayerCommand {
         sb.append("\n === FISHING SIMULATION (n=").append(total).append(") ===");
         sb.append("\n Location: ").append(ctx.biome()).append(" | Tier: ").append(ctx.tier());
         sb.append("\n Depth: 20 | Time: ").append(ctx.time().getKeyword());
+        sb.append("\n trigger volume: ").append(ctx.triggerKey());
         sb.append("\n-------------------------------------------");
         results.forEach((id, count) -> {
             sb.append(String.format("\n- %-25s : %d%% (%d)", id, (count * 100 / total), count));

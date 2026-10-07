@@ -61,7 +61,7 @@ almanac.unknown = Desconhecido
 almanac.glossaryTab.tooltip = Ir para página do Glossário
 almanac.statsTab.tooltip = Ir para página Inicial
 ### Almanac stats
-almanac.stats.player= Status do Jogador:
+almanac.stats.player= Status do Jogador: {name}
 almanac.stats.total = Peixes totais: {count}
 almanac.stats.most = Mais encontrado: {name}
 almanac.stats.legendary = Peixes Lendários: {count}

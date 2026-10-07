@@ -90,30 +90,41 @@ public class FishLoot {
 
 
     public static class Habitats {
+
+        @CodecAnnotations.Field(value = "Volumes", doc = "Sets which trigger volume is part of")
+        @CodecAnnotations.UniqueArray
+        public String[] triggerVolumes = new String[0];
+
         @CodecAnnotations.Field(value = "Zones", doc = "Set what area and conditions to give the item.")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public String[] zones = new String[0];
 
         @CodecAnnotations.Field("Tiers")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public Integer[] tier = new Integer[0];
 
         @CodecAnnotations.Field("Regions")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public String[] regions = new String[0];
 
         @CodecAnnotations.Field("Biomes")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public String[] biomes = new String[0];
 
         @CodecAnnotations.Field("Time_of_day")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public TimePeriod[] time_of_day = new TimePeriod[0];
 
         public String[] required_weather = new String[0]; // NOT IN USE
 
         @CodecAnnotations.Field(value = "Moon_phase", doc = "If a value of -1 is selected then it be disabled")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public Integer[] moon_phase = new Integer[0];
 
         @CodecAnnotations.Field("Min_depth")
@@ -123,20 +134,28 @@ public class FishLoot {
         @CodecAnnotations.Field("Height")
         public Height height = new Height(0, -1);
 
+        @CodecAnnotations.Field(value = "Exclude_trigger", doc = "Sets which trigger volume is part of")
+        @CodecAnnotations.UniqueArray
+        public String[] exclude_triggerVolumes = new String[0];
+
         @CodecAnnotations.Field("Exclude_zones")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public String[] exclude_zones = new String[0];
 
         @CodecAnnotations.Field("Exclude_tiers")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public Integer[] exclude_tiers = new Integer[0];
 
         @CodecAnnotations.Field("Exclude_biomes")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public String[] exclude_biomes = new String[0];
 
         @CodecAnnotations.Field("Exclude_regions")
         @CodecAnnotations.UniqueArray
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public String[] exclude_regions = new String[0];
 
         @CodecAnnotations.Field("Weight_multiplier")
@@ -148,6 +167,7 @@ public class FishLoot {
 
         @CodecAnnotations.Field("Required_Power")
         @CodecAnnotations.Min(0)
+        @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
         public int required_power = 0;
 
         public Habitats() {

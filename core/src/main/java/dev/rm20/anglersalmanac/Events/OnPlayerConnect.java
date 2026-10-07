@@ -7,7 +7,6 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
 import com.hypixel.hytale.server.core.event.events.player.PlayerReadyEvent;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import dev.rm20.anglersalmanac.AlmanacBook.AlmanacBook;
 import dev.rm20.anglersalmanac.AnglersAlmanac;
 import dev.rm20.anglersalmanac.Inventory.FishBagComponent;
 import dev.rm20.anglersalmanac.Registration.EventInfo;
@@ -18,7 +17,7 @@ public class OnPlayerConnect {
     public static void handle(PlayerConnectEvent event) {
         //AnglersAlmanac.LOGGER.atInfo().log("Player joined");
         PlayerRef playerRef1 = event.getPlayerRef();
-        AlmanacBook.sendTranslations(playerRef1);
+        //AlmanacBook.sendTranslations(playerRef1);
         //event.getPlayer().getInventory().markChanged();
         //AlmanacBook.syncOwnBookOnJoin(playerRef1);
     }

@@ -22,8 +22,11 @@ import dev.rm20.anglersalmanac.Utils.Validator.TimePeriod;
 import javax.annotation.Nonnull;
 
 @CommandInfo(
-        name = "zoneinfo",
-        description = "Gets info about current area, to be used for fishing"
+        name = "zone",
+        description = "Displays fishing habitat, tier, and environment info for current location",
+        aliases = {"zoneinfo", "habitat", "where"},
+        parent = "almanac",
+        permission = "AnglersAlmanac.admin"
 )
 public class HabitatCommand extends AbstractPlayerCommand {
 
@@ -81,7 +84,8 @@ public class HabitatCommand extends AbstractPlayerCommand {
                     "clear", // Hardcoded for test
                     0,
                     null,
-                    1
+                    1,
+                    null
             );
 
             // 5. Output

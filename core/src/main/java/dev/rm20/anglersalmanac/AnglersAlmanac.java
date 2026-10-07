@@ -9,7 +9,6 @@ import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.Config;
 import dev.rm20.anglersalmanac.AlmanacBook.AlmanacDatabase;
-import dev.rm20.anglersalmanac.AlmanacBook.AlmanacRepository;
 import dev.rm20.anglersalmanac.AlmanacBook.BookPageManager;
 import dev.rm20.anglersalmanac.Components.BobberComponent;
 import dev.rm20.anglersalmanac.Config.AnglersAlmanacConfig;
@@ -39,7 +38,6 @@ public class AnglersAlmanac extends JavaPlugin {
     public ThankmasVaultHook ECONOMY_HOOK;
 
     public AlmanacDatabase database;
-    public AlmanacRepository Book_IDs;
     public FishLootManager fishLootManager;
     public BookAssetData bookAssetData;
 
@@ -71,7 +69,6 @@ public class AnglersAlmanac extends JavaPlugin {
 
         //start database
         this.database = new AlmanacDatabase();
-        this.Book_IDs = new AlmanacRepository();
         AnglersAlmanacAPI.getConfig().save();
         AnglersAlmanacAPI.getMinigameConfig().save();
 
@@ -103,10 +100,6 @@ public class AnglersAlmanac extends JavaPlugin {
         super.shutdown();
         if (this.database != null) {
             this.database.close();
-        }
-        if(this.Book_IDs != null)
-        {
-            this.Book_IDs.close();
         }
     }
 

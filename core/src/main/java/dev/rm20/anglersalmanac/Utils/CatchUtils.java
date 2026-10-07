@@ -1,5 +1,7 @@
 package dev.rm20.anglersalmanac.Utils;
 
+import com.hypixel.hytale.builtin.triggervolumes.TriggerVolumesPlugin;
+import com.hypixel.hytale.builtin.triggervolumes.manager.TriggerVolumeManager;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.math.vector.Rotation3f;
 import com.hypixel.hytale.protocol.ItemWithAllMetadata;
@@ -114,39 +116,43 @@ public class CatchUtils implements ICatchManager {
         int moonPhase = timeResource.getMoonPhase();
 
         // Habitats info
-        WorldMapTracker worldMapTracker = player.getWorldMapTracker();
-        WorldMapTracker.ZoneDiscoveryInfo currentZone = worldMapTracker.getCurrentZone();
+//        WorldMapTracker worldMapTracker = player.getWorldMapTracker();
+//        WorldMapTracker.ZoneDiscoveryInfo currentZone = worldMapTracker.getCurrentZone();
         String Region = "Unknown";
         String Biome = "Unknown";
         String zone = "Unknown";
         int tier = 1;
-        if (currentZone != null) {
-            String RawZone = currentZone.regionName();
-            Region = currentZone.zoneName();
-            Biome = worldMapTracker.getCurrentBiomeName();
-            ZoneInfo info = EnvironmentParser.parse(RawZone);
-            zone = info.zone();
-            tier = info.tier();
-        } else {
-            World world = player.getWorld();
-            //AnglersAlmanac.LOGGER.atInfo().log(world.getName());
-            String worldName = world.getName();
-            if (worldName.contains("Portals_Taiga")) {
-                zone = "3";
-                Region = "Portals_Taiga";
-            } else if (worldName.contains("Portals_Hedera")) {
-                zone = "3";
-                Region = "Portals_Hedera";
-            } else if (worldName.contains("Portals_Oasis")) {
-                zone = "2";
-                Region = "Portals_Oasis";
-            } else if (worldName.contains("Portals_Jungles")) {
-                Region = "Portals_Jungles";
-            } else if (worldName.contains("Portals_Henges")) {
-                zone = "3";
-                Region = "Portals_Henges";
-            }
-        }
+//        if (currentZone != null) {
+//            String RawZone = currentZone.regionName();
+//            Region = currentZone.zoneName();
+//            Biome = worldMapTracker.getCurrentBiomeName();
+//            ZoneInfo info = EnvironmentParser.parse(RawZone);
+//            zone = info.zone();
+//            tier = info.tier();
+//        } else {
+//            World world = player.getWorld();
+//            //AnglersAlmanac.LOGGER.atInfo().log(world.getName());
+//            String worldName = world.getName();
+//            if (worldName.contains("Portals_Taiga")) {
+//                zone = "3";
+//                Region = "Portals_Taiga";
+//            } else if (worldName.contains("Portals_Hedera")) {
+//                zone = "3";
+//                Region = "Portals_Hedera";
+//            } else if (worldName.contains("Portals_Oasis")) {
+//                zone = "2";
+//                Region = "Portals_Oasis";
+//            } else if (worldName.contains("Portals_Jungles")) {
+//                Region = "Portals_Jungles";
+//            } else if (worldName.contains("Portals_Henges")) {
+//                zone = "3";
+//                Region = "Portals_Henges";
+//            }
+//        }
+
+        TriggerVolumeManager manager = store.getResource(TriggerVolumesPlugin.get().getManagerResourceType());
+
+        String triggerKey = TriggerVolumeUtils.getFishingZone(manager, transform.getPosition());
 
 
         // Combine
@@ -161,7 +167,8 @@ public class CatchUtils implements ICatchManager {
                 "clear",
                 depth,
                 baitID,
-                FishingPowerUtils.getTotalFishingPower(store,player.getReference())
+                FishingPowerUtils.getTotalFishingPower(store,player.getReference()),
+                triggerKey
         );
         // get fish
 

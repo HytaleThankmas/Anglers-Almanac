@@ -59,7 +59,7 @@ almanac.unknown = Sconosciuto
 almanac.glossaryTab.tooltip = Vai al Glossario
 almanac.statsTab.tooltip = Vai alle Statistiche
 ### Almanac stats
-almanac.stats.player= Statistiche Del Giocatore:
+almanac.stats.player= Statistiche Del Giocatore: {name}
 almanac.stats.total = Pesci Totali: {count}
 almanac.stats.most = Più Trovati: {name}
 almanac.stats.legendary = Pesci Leggendari: {count}

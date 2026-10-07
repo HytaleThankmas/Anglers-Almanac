@@ -59,7 +59,7 @@ dependencies {
 
     //implementation(files("../libs/Creditor-1.0.4.jar"))
     //implementation("curse.maven:creditor-1560961:8195970")
-    implementation("com.github.rm20killer:CodecAnnotation:1.0.0")
+    implementation("com.github.rm20killer:CodecAnnotation:163cdff")
 
     compileOnly(files("../libs/Thankmas-Vault-0.0.1.jar"))
 

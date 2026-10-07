@@ -10,4 +10,7 @@ import java.lang.annotation.Target;
 public @interface CommandInfo {
     String name();
     String description() default "";
+    String[] aliases() default {};
+    String parent() default "";
+    String permission() default "";
 }

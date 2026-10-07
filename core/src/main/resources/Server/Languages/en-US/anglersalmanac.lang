@@ -62,7 +62,7 @@ almanac.unknown = Unknown
 almanac.glossaryTab.tooltip = Go to Glossary Page
 almanac.statsTab.tooltip = Go to Stats Page
 ### Almanac stats
-almanac.stats.player= Player Stats:
+almanac.stats.player= Player Stats: {name}
 almanac.stats.total = Total fish: {count}
 almanac.stats.most = Most found: {name}
 almanac.stats.legendary = Legendary fish: {count}
