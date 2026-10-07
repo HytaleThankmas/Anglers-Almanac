@@ -63,7 +63,7 @@ almanac.glossaryTab.tooltip = Zum Glossar
 almanac.statsTab.tooltip = Zu den Statistiken
 
 ### Almanach Statistiken
-almanac.stats.player = Spielerstatistiken:
+almanac.stats.player = Spielerstatistiken: {name}
 almanac.stats.total = Fische gesamt: {count}
 almanac.stats.most = Am häufigsten gefangen: {name}
 almanac.stats.legendary = Legendäre Fische: {count}

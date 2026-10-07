@@ -13,5 +13,6 @@ public record FishingContext(
         String weather,
         int waterDepth,
         String baitAsset,
-        float fishingPower
+        float fishingPower,
+        String triggerKey
 ) { }

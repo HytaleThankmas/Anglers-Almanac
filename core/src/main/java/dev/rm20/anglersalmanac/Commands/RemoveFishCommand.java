@@ -22,7 +22,10 @@ import java.util.Collection;
 
 @CommandInfo(
         name = "removefish",
-        description = "Initializes fish entries in your Almanac with 0 catches."
+        description = "Removes fish entries from your Almanac",
+        aliases = {"remove", "del", "delete"},
+        parent = "almanac",
+        permission = "AnglersAlmanac.admin"
 )
 public class RemoveFishCommand extends AbstractPlayerCommand {
     private final RequiredArg<String> fishArg;

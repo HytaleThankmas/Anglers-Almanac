@@ -16,8 +16,11 @@ import dev.rm20.anglersalmanac.Registration.CommandInfo;
 import javax.annotation.Nonnull;
 
 @CommandInfo(
-        name = "OpenConfig",
-        description = "Opens the config"
+        name = "config",
+        description = "Opens the Angler's Almanac configuration menu",
+        aliases = {"openconfig", "settings"},
+        parent = "almanac",
+        permission = "AnglersAlmanac.admin"
 )
 public class OpenConfig extends AbstractPlayerCommand {
 
@@ -28,21 +31,15 @@ public class OpenConfig extends AbstractPlayerCommand {
 
     @Override
     protected void execute(@Nonnull CommandContext commandContext, @Nonnull Store<EntityStore> store, @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
-//        if (!(commandContext.sender().)) {
-//            commandContext.sendMessage(Message.translation("anglersalmanac.cmd.error.notPlayer"));
-//            return;
-//        }
-        if(!commandContext.sender().hasPermission("AnglersAlmanac.admin"))
-        {
+        if (!playerRef.hasPermission("AnglersAlmanac.admin")) {
             commandContext.sendMessage(Message.translation("anglersalmanac.cmd.error.noPerms"));
             return;
         }
         Player player = store.getComponent(ref, Player.getComponentType());
-        if(player == null)
-        {
+        if (player == null) {
             commandContext.sendMessage(Message.translation("anglersalmanac.cmd.error.notPlayer"));
             return;
         }
-        player.getPageManager().openCustomPage(ref,store,new ConfigUI(playerRef, CustomPageLifetime.CanDismissOrCloseThroughInteraction));
+        player.getPageManager().openCustomPage(ref, store, new ConfigUI(playerRef, CustomPageLifetime.CanDismissOrCloseThroughInteraction));
     }
 }

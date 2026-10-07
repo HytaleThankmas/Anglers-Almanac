@@ -22,7 +22,10 @@ import java.util.Collection;
 
 @CommandInfo(
         name = "addfish",
-        description = "Initializes fish entries in your Almanac with 0 catches used for testing"
+        description = "Initializes fish entries in your Almanac with 0 catches",
+        aliases = {"add"},
+        parent = "almanac",
+        permission = "AnglersAlmanac.admin"
 )
 public class AddFishCommand extends AbstractPlayerCommand {
     private final RequiredArg<String> fishArg;

@@ -20,7 +20,10 @@ import java.util.Set;
 
 @CommandInfo(
         name = "cleanup",
-        description = "Purges all tension bar minigame visual widgets from the loaded world chunks"
+        description = "Purges all tension bar minigame visual widgets from the loaded world chunks",
+        aliases = {"purge", "clearwidgets"},
+        parent = "almanac",
+        permission = "AnglersAlmanac.admin"
 )
 public class PurgeWidgetsCommand extends AbstractPlayerCommand {
 
