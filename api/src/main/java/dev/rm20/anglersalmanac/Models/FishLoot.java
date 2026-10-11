@@ -46,7 +46,6 @@ public class FishLoot {
 
     @Getter
     @CodecAnnotations.Field("SellPrice")
-    @CodecAnnotations.Min(0)
     protected float sellPrice;
 
     @Getter
