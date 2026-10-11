@@ -7,11 +7,9 @@ import com.hypixel.hytale.component.Holder;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.math.vector.Rotation3f;
 import com.hypixel.hytale.math.vector.Transform;
-import com.hypixel.hytale.server.core.HytaleServer;
-import dev.rm20.anglersalmanac.IEvents.FishingRodCastEvent;
-import org.joml.Vector3d;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.protocol.SoundCategory;
+import com.hypixel.hytale.server.core.HytaleServer;
 import com.hypixel.hytale.server.core.asset.type.model.config.Model;
 import com.hypixel.hytale.server.core.asset.type.model.config.ModelAsset;
 import com.hypixel.hytale.server.core.asset.type.soundevent.config.SoundEvent;
@@ -31,8 +29,10 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.TargetUtil;
 import dev.rm20.anglersalmanac.Components.BobberComponent;
 import dev.rm20.anglersalmanac.Components.PhysicsComponent;
+import dev.rm20.anglersalmanac.IEvents.FishingRodCastEvent;
 import dev.rm20.anglersalmanac.Metadata.FishingRodData;
 import dev.rm20.anglersalmanac.Utils.BaitUtils;
+import org.joml.Vector3d;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;
@@ -93,12 +93,10 @@ public class CastBobberInteraction extends SimpleInstantInteraction {
         ItemStack bait = BaitUtils.findBait(player.getReference().getStore(), player.getReference());
 
         if (bait != null) {
-            BaitUtils.removeBait(player,bait.getItemId());
+            BaitUtils.removeBait(player, bait.getItemId());
             bobberComp.setBaitName(bait.getItemId());
-        }
-        else
-        {
-            BaitUtils.SendBaitNotification(player);
+        } else {
+            //BaitUtils.SendBaitNotification(player);
         }
         bobberHolder.addComponent(BobberComponent.getComponentType(), bobberComp);
         ModelAsset modelAsset = ModelAsset.getAssetMap().getAsset("Bobber");

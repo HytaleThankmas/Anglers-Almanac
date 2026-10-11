@@ -45,6 +45,10 @@ public class FishLoot {
     protected int weight;
 
     @Getter
+    @CodecAnnotations.Field("SellPrice")
+    protected float sellPrice;
+
+    @Getter
     @CodecAnnotations.Field("IsGlobal")
     protected boolean isGlobal;
 
@@ -64,6 +68,7 @@ public class FishLoot {
     protected BookInfo bookInfo;
 
     @CodecAnnotations.Field(value = "Size", doc = "NOT IN USE")
+    @CodecAnnotations.DisplayMode(CodecAnnotations.DisplayMode.Mode.HIDDEN)
     private int size;
 
     public FishLoot() {

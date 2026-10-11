@@ -150,24 +150,25 @@ public class BaitUtils {
 
     public static void SendBaitNotification(Player player)
     {
-        Ref<EntityStore> playerRef = player.getReference();
-        if(playerRef == null) return;
-        PlayerRef playerRef1 = playerRef.getStore().getComponent(playerRef, PlayerRef.getComponentType());
-        if(playerRef1 == null) return;
-        Message titleMessage = Message.translation("anglersalmanac.fishing.bait.no");
-        titleMessage.color(Color.RED);
-        Message subtitleMessage = Message.translation("anglersalmanac.fishing.bait.used");
-        try {
-            var packetHandler = playerRef1.getPacketHandler();
-            NotificationUtil.sendNotification(
-                    packetHandler,
-                    titleMessage,
-                    subtitleMessage,
-                    NotificationStyle.Danger
-                    );
-        } catch (Exception e) {
-            AnglersAlmanac.LOGGER.atWarning().log("Failed to send notification to " + playerRef1.getUsername() + ": " + e.getMessage());
-        }
+        return;
+//        Ref<EntityStore> playerRef = player.getReference();
+//        if(playerRef == null) return;
+//        PlayerRef playerRef1 = playerRef.getStore().getComponent(playerRef, PlayerRef.getComponentType());
+//        if(playerRef1 == null) return;
+//        Message titleMessage = Message.translation("anglersalmanac.fishing.bait.no");
+//        titleMessage.color(Color.RED);
+//        Message subtitleMessage = Message.translation("anglersalmanac.fishing.bait.used");
+//        try {
+//            var packetHandler = playerRef1.getPacketHandler();
+//            NotificationUtil.sendNotification(
+//                    packetHandler,
+//                    titleMessage,
+//                    subtitleMessage,
+//                    NotificationStyle.Danger
+//                    );
+//        } catch (Exception e) {
+//            AnglersAlmanac.LOGGER.atWarning().log("Failed to send notification to " + playerRef1.getUsername() + ": " + e.getMessage());
+//        }
     }
 
 

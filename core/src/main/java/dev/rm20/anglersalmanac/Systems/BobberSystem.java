@@ -9,8 +9,6 @@ import com.hypixel.hytale.server.core.entity.UUIDComponent;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
-import com.hypixel.hytale.server.core.modules.debug.DebugUtils;
-import com.hypixel.hytale.server.core.modules.entity.component.HeadRotation;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.ParticleUtil;
@@ -21,7 +19,6 @@ import dev.rm20.anglersalmanac.AnglersAlmanac;
 import dev.rm20.anglersalmanac.Components.BobberComponent;
 import dev.rm20.anglersalmanac.Interactions.Rod.UseRodInteraction;
 import dev.rm20.anglersalmanac.Metadata.FishingRodData;
-import dev.rm20.anglersalmanac.Utils.LineRender.FishingLineRender;
 import dev.rm20.anglersalmanac.api.AnglersAlmanacAPI;
 import org.joml.Vector3d;
 
@@ -29,8 +26,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.UUID;
-
-import static dev.rm20.anglersalmanac.Utils.BaitUtils.SendBaitNotification;
 
 public class BobberSystem extends EntityTickingSystem<EntityStore> {
     private final Random random = new Random();
@@ -138,7 +133,7 @@ public class BobberSystem extends EntityTickingSystem<EntityStore> {
         } else {
             player = null;
         }
-        if (component == null){
+        if (component == null) {
             AnglersAlmanac.LOGGER.atWarning().log("no bobber component");
             return;
         }
@@ -165,7 +160,7 @@ public class BobberSystem extends EntityTickingSystem<EntityStore> {
                 boolean requiresBait = AnglersAlmanacAPI.getConfig().get().getShouldUseBait();
                 String baitName = component.getBaitName();
                 if (requiresBait && (baitName == null || baitName.isEmpty())) {
-                    SendBaitNotification(player);
+                    //SendBaitNotification(player);
                     //AnglersAlmanac.LOGGER.atInfo().log("No bait on rod");
                     resetWaitTimer(component);
                     return;
