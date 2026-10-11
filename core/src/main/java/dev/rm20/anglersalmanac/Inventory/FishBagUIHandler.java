@@ -7,33 +7,6 @@ import dev.rm20.anglersalmanac.AnglersAlmanac;
 
 public class FishBagUIHandler {
 
-    public static void openFishMarket(Player player) {
-        var accessor = player.getReference().getStore();
-
-        FishBagComponent.ensurePlayerHasFishBag(player);
-        FishBagComponent fishBag = accessor.getComponent(
-                player.getReference(),
-                FishBagComponent.getComponentType()
-        );
-
-        if (fishBag == null) {
-            return;
-        }
-
-        PlayerRef playerRef = accessor.getComponent(player.getReference(), PlayerRef.getComponentType());
-        if (playerRef == null) return;
-
-        var page = new FishBagPage(playerRef);
-
-        player.getPageManager().openCustomPage(
-                player.getReference(),
-                accessor,
-                page
-        );
-
-        AnglersAlmanac.LOGGER.atInfo().log("Opened bag");
-
-    }
 
 
     public static void openFishBag(Player player) {

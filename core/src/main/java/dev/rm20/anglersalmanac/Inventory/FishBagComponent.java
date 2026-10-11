@@ -12,6 +12,7 @@ import com.hypixel.hytale.server.core.inventory.container.filter.FilterActionTyp
 import com.hypixel.hytale.server.core.inventory.container.filter.FilterType;
 import com.hypixel.hytale.server.core.inventory.container.filter.SlotFilter;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import dev.rm20.anglersalmanac.AnglersAlmanac;
 import dev.rm20.anglersalmanac.Inventory.Filter.FishItemAddFilter;
 import lombok.Getter;
 import lombok.Setter;
@@ -80,12 +81,19 @@ public class FishBagComponent extends InventoryComponent {
     public static void ensurePlayerHasFishBag(Player player) {
         var accessor = player.getReference().getStore();
 
+
         if (accessor.getComponent(player.getReference(), FishBagComponent.getComponentType()) == null) {
-            accessor.putComponent(
-                    player.getReference(),
-                    FishBagComponent.getComponentType(),
-                    new FishBagComponent(FishBagComponent.DEFAULT_CAPACITY)
-            );
+            if(player.getWorld()!=null && player.getWorld().isTicking())
+            {
+                player.getWorld().execute(() -> {
+                    AnglersAlmanac.LOGGER.atInfo().log("Attaching new FishBagComponent to player.");
+                    accessor.putComponent(
+                            player.getReference(),
+                            FishBagComponent.getComponentType(),
+                            new FishBagComponent(FishBagComponent.DEFAULT_CAPACITY)
+                    );
+                });
+            }
         }
     }
 }

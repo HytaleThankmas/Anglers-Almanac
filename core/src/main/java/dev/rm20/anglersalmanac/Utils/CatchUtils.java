@@ -213,16 +213,22 @@ public class CatchUtils implements ICatchManager {
             var accessor = player.getReference().getStore();
 
             if (accessor.getComponent(player.getReference(), FishBagComponent.getComponentType()) == null) {
-                AnglersAlmanac.LOGGER.atInfo().log("Attaching new FishBagComponent to player.");
-                accessor.putComponent(
-                        player.getReference(),
-                        FishBagComponent.getComponentType(),
-                        new FishBagComponent(FishBagComponent.DEFAULT_CAPACITY)
-                );
+                commandBuffer.getExternalData().getWorld().execute(() -> {
+                    AnglersAlmanac.LOGGER.atInfo().log("Attaching new FishBagComponent to player.");
+                    accessor.putComponent(
+                            player.getReference(),
+                            FishBagComponent.getComponentType(),
+                            new FishBagComponent(FishBagComponent.DEFAULT_CAPACITY)
+                    );
+                    DropItem(loot, player, commandBuffer, bobberRef);
+                });
+                return true;
             }
 
-            var combined = InventoryComponent.getCombined(accessor, player.getReference(), FISH_ROUTING);
 
+
+            var combined = InventoryComponent.getCombined(accessor, player.getReference(), FISH_ROUTING);
+//            AnglersAlmanac.LOGGER.atInfo().log(String.valueOf(combined.getContainersSize()));
             var remainder = combined.addItemStack(loot);
             if (remainder.getRemainder() != null && remainder.getRemainder().getQuantity() > 0) {
                 //AnglersAlmanac.LOGGER.atInfo().log("Fish bag is full!");
