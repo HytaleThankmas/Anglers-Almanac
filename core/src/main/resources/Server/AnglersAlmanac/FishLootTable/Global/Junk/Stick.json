@@ -10,6 +10,7 @@
   "Rarity": "Junk",
   "IsGlobal": true,
   "Weight": 100,
+  "SellPrice": 0.01,
   "Size": 30,
   "Habitats": {
     "Zones": [],
