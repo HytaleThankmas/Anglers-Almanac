@@ -167,7 +167,7 @@ public class BookAssetData implements JsonAssetWithMap<String, DefaultAssetMap<S
                     .map(id -> new FishEntry(id, FishLootManager.getInternalFishData(id) != null))
                     .toList();
 
-            newCache.put(habitat.ZoneName.toLowerCase(), Collections.unmodifiableList(fishList));
+            newCache.put(habitat.ZoneName.toLowerCase(), fishList);
         }
         return Collections.unmodifiableMap(newCache);
     }
