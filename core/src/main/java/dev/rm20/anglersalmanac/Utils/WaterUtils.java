@@ -26,8 +26,10 @@ public class WaterUtils {
     public static boolean isInWater(World world, int x, int y, int z) {
         if (world == null) return false;
         Fluid fluid = getFluidId(x, y, z, world);
-        if (fluid == null) return false;
-        return fluid.getId().toLowerCase().contains("water");
+        if (fluid == null || fluid.getId() == null) return false;
+
+        String id = fluid.getId().toLowerCase();
+        return id.contains("water") || id.contains("poison");
     }
 
     /**
